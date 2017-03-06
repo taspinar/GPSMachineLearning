@@ -8,13 +8,9 @@ The dataset used is the popular [GeoLife GPS Trajectories](https://www.microsoft
 We have provided some notebooks, which should give you a flying start, but feel free to do everything your own way. 
 
 # relevant datasets
-+ [Bus routes and stops of Beijing](https://www.dropbox.com/s/ryk0197wnr145rv/DT18.rar)
++ [Bus routes and stops of Beijing](https://www.dropbox.com/s/ryk0197wnr145rv/DT18.rar) -> contains 1.543 bus routes and 42.161 stops 
 
-++ contains 1.543 bus routes and 42.161 stops 
-
-+ [Beijing check-in records from Sina](https://www.beijingcitylab.com/app/download/10965785399/DT24.zip?t=1460518522)
-
-++ contains 868 m check-ins for all 143,576 venues.
++ [Beijing check-in records from Sina](https://www.beijingcitylab.com/app/download/10965785399/DT24.zip?t=1460518522) -> contains 868 m check-ins for all 143,576 venues.
 
 + [Road junction density of China in 2011](https://www.dropbox.com/s/eppkm3p1jfyx6ae/DT21.zip)
 
