@@ -4,8 +4,18 @@ This repository contains code and jupyter notebooks with machine learning algori
 
 The dataset used is the popular [GeoLife GPS Trajectories](https://www.microsoft.com/en-us/download/details.aspx?id=52367) 
 
+# Tasks
+1.	How can we load GPS trajectories in a proper way so that it will be easier to work with in the future.
+2.	What is classification, and how can we apply classification to GPS data to automatically detect the modality of the transport (walking, bicycle, car, train).
+3.	What are popular routes taken and does the popularity of the route of the route affect the traffic?
+4.	Can driver behaviour be deduced from the GPS trajectories, and can we tell how driver behaviour affects traffic?
+5.	What are the points of interest e.g., restaurants, stores, hotels, etc. 
+
+
 # Notebooks 
 We have provided some notebooks, which should give you a flying start, but feel free to do everything your own way. 
++ [1. loading the GPS data, enriching it with velocity and acc information, adding correct labels to each trajectory](https://github.com/taspinar/GPSMachineLearning/blob/master/notebooks/load_gps_data.ipynb)
+
 
 # relevant datasets
 + [Bus routes and stops of Beijing](https://www.dropbox.com/s/ryk0197wnr145rv/DT18.rar) -> contains 1.543 bus routes and 42.161 stops 
