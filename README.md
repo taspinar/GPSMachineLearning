@@ -5,9 +5,14 @@ This repository contains code and jupyter notebooks with machine learning algori
 The dataset used is the popular [GeoLife GPS Trajectories](https://www.microsoft.com/en-us/download/details.aspx?id=52367) 
 
 # Tasks
-0.	How can we load GPS trajectories in a proper way so that it will be easier to work with in the future.
-1.	Supervised Machine Learning: Build a classifier which can automatically detect the transportation mode of the trajectories (walking, bicycle, car etc). 
-3.	Unsupervised Learning; Clustering of the GPS trajectories by using auto-encoders and recurrent neural networks. 3.	GeoSpatial analysis of the GPS trajectories; Analysis and visualization of the taken routes (does the popularity of a route affect the traffic? What are the points of interest e.g., restaurants, stores, hotels, etc. )
+
++ 0)	How can we load GPS trajectories in a proper way so that it will be easier to work with in the future.
+
++ 1)	Supervised Machine Learning: Build a classifier which can automatically detect the transportation mode of the trajectories (walking, bicycle, car etc). 
+
++ 3)	Unsupervised Learning; Clustering of the GPS trajectories by using auto-encoders and recurrent neural networks. 
+
++ 4)	GeoSpatial analysis of the GPS trajectories; Analysis and visualization of the taken routes (does the popularity of a route affect the traffic? What are the points of interest e.g., restaurants, stores, hotels, etc. )
 
 
 # Notebooks 
