@@ -10,9 +10,9 @@ The dataset used is the popular [GeoLife GPS Trajectories](https://www.microsoft
 
 + 1)	Supervised Machine Learning: Build a classifier which can automatically detect the transportation mode of the trajectories (walking, bicycle, car etc). 
 
-+ 3)	Unsupervised Learning; Clustering of the GPS trajectories by using auto-encoders and recurrent neural networks. 
++ 2)	Unsupervised Learning; Clustering of the GPS trajectories by using auto-encoders and recurrent neural networks. 
 
-+ 4)	GeoSpatial analysis of the GPS trajectories; Analysis and visualization of the taken routes (does the popularity of a route affect the traffic? What are the points of interest e.g., restaurants, stores, hotels, etc. )
++ 3)	GeoSpatial analysis of the GPS trajectories; Analysis and visualization of the taken routes (does the popularity of a route affect the traffic? What are the points of interest e.g., restaurants, stores, hotels, etc. )
 
 
 # Notebooks 
