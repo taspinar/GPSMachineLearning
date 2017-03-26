@@ -2,3 +2,7 @@ notebooks/.ipynb_checkpoints/
 
 /GPSML
 /.idea
+/processed_data
+
+*.pyc
+*.tar.gz
