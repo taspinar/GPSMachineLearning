@@ -17,7 +17,9 @@ The dataset used is the popular [GeoLife GPS Trajectories](https://www.microsoft
 
 # Notebooks 
 We have provided some notebooks, which should give you a flying start, but feel free to do everything your own way. 
-+ [1. loading the GPS data, enriching it with velocity and acc information, adding correct labels to each trajectory](https://github.com/taspinar/GPSMachineLearning/blob/master/notebooks/load_gps_data.ipynb)
++ [1. loading the GPS data, enriching it with velocity and acc information, adding correct labels to each trajectory](https://github.com/taspinar/GPSMachineLearning/blob/master/notebooks/1.load_gps_data.ipynb)
+
++ [2. Modality detection with enriched and labeled trajectories](https://github.com/taspinar/GPSMachineLearning/blob/master/notebooks/2.modality_detection.ipynb)
 
 
 # Possible relevant datasets
