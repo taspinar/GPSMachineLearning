@@ -5,7 +5,8 @@ import numpy as np
 
 
 import os
-
+import time
+import datetime
 #import geopandas as gpd
 #from geographiclib.geodesic import Geodesic
 #from geopy.distance import vincenty
@@ -75,29 +76,41 @@ def load_labels_df(filename):
 
 
 def retrieve_metadata(df):
-    df_meta = pd.DataFrame(columns=headers_metadf)
+    hot = {'walk':  np.array([1,0,0,0,0,0]),
+           'train': np.array([0,1,0,0,0,0]),
+           'subway':np.array([0,0,1,0,0,0]),
+           'taxi':  np.array([0,0,0,1,0,0]),
+           'bus':   np.array([0,0,0,0,1,0]),
+           'bike':  np.array([0,0,0,0,0,1])}
+    D = len(hot['walk'])
     trajectory_ids = df['trajectory_id'].unique()
-    for ii in range(len(trajectory_ids)):
+    L = len(trajectory_ids)
+    X = np.zeros((L,4),dtype=np.float16)
+    Y = np.zeros(((L,D)),np.int16)
+    for ii in range(L):
         trajectory_id = trajectory_ids[ii]
         df_ = df[df['trajectory_id'] == trajectory_id]
-        start_time = df_.head(1)['datetime'].values[0]
-        end_time = df_.tail(1)['datetime'].values[0]
+        #start_time = df_.head(1)['datetime'].values[0]
+        #end_time = df_.tail(1)['datetime'].values[0]
         v_ave = np.nanmean(df_['velocity'].values)
         v_med = np.nanmedian(df_['velocity'].values)
         a_ave = np.nanmean(df_['acceleration'].values)
         a_med = np.nanmedian(df_['acceleration'].values)
+        X[ii] = np.array([v_ave,v_med,a_ave,a_med])
+
         labels = df_['labels'].unique()
-        labels = ",".join(labels)
-        df_meta.loc[ii, :] = [trajectory_id, start_time, end_time, v_ave, v_med, a_ave, a_med, labels]
-    return df_meta
+        if len(labels) > 0:
+            for l in labels:
+                if not l == '':
+                    try:
+                      Y[ii] += hot[l]
+                    except KeyError as e:
+                        print('missing key %s'%e)
+    return X,Y
 
-
-MAIN_FOLDER = '../../GPSML/Data/'
-if not os.path.exists(MAIN_FOLDER):
-    MAIN_FOLDER = '../GPSML/Data/'
-    assert os.path.exists(MAIN_FOLDER), 'Expected GPSML data in %s' % (MAIN_FOLDER)
 
 labels_file = 'labels.txt'
+MAIN_FOLDER = '../GPSML/Data/'
 TRAJ_FOLDER = 'Trajectory/'
 directories = os.listdir(MAIN_FOLDER)
 OUTPUT_FOLDER = '../processed_data/'
@@ -105,35 +118,44 @@ OUTPUT_FOLDER = '../processed_data/'
 if not os.path.exists(OUTPUT_FOLDER):
     os.makedirs(OUTPUT_FOLDER)
 
-num_direc = len(directories)
-print('Subfolder|num trajectories|progress')
-for num,subfolder in enumerate(directories):
-    list_df_traj = []
-    subfolder_ = MAIN_FOLDER + subfolder + '/'
-    traj_folder = MAIN_FOLDER + subfolder + '/' + TRAJ_FOLDER
-    traj_files = os.listdir(traj_folder)
-    print('%5s    |%5s           |(progress %3i of %3i)'%(subfolder, len(traj_files), num, num_direc))
-    for traj_file in traj_files:
-        trajectory_id = traj_file.split('.')[0]
-        filename = traj_folder + traj_file
-        df_traj = load_trajectory_df(subfolder, filename, trajectory_id)
-        list_df_traj.append(df_traj)
-    df_traj_all = pd.concat(list_df_traj)
+total_lines = 0
+t1 = time.time()
+times = []
+with open(OUTPUT_FOLDER+'all_meta_X.csv','ab') as f_X, open(OUTPUT_FOLDER+'all_meta_y.csv','ab') as f_y:
+    total_subs = len(directories)
+    for i_sub,subfolder in enumerate(directories):
+      # if '117' in subfolder:
+        list_df_traj = []
+        subfolder_ = MAIN_FOLDER + subfolder + '/'
+        traj_folder = MAIN_FOLDER + subfolder + '/' + TRAJ_FOLDER
+        traj_files = os.listdir(traj_folder)
+        for traj_file in traj_files:
+            trajectory_id = traj_file.split('.')[0]
+            filename = traj_folder + traj_file
+            df_traj = load_trajectory_df(subfolder, filename, trajectory_id)
+            list_df_traj.append(df_traj)
+        df_traj_all = pd.concat(list_df_traj)
 
-    if labels_file in os.listdir(subfolder_):
-        filename = subfolder_ + labels_file
-        df_labels = load_labels_df(filename)
-        for idx in df_labels.index.values:
-            st = df_labels.ix[idx]['start_time']
-            et = df_labels.ix[idx]['end_time']
-            labels = df_labels.ix[idx]['labels']
-            if labels:
-                df_traj_all.loc[(df_traj_all['datetime'] >= st) &
-                                (df_traj_all['datetime'] <= et), 'labels'] = labels
+        if labels_file in os.listdir(subfolder_):
+            filename = subfolder_ + labels_file
+            df_labels = load_labels_df(filename)
+            for idx in df_labels.index.values:
+                st = df_labels.ix[idx]['start_time']
+                et = df_labels.ix[idx]['end_time']
+                labels = df_labels.ix[idx]['labels']
+                if labels:
+                    df_traj_all.loc[(df_traj_all['datetime'] >= st) &
+                                    (df_traj_all['datetime'] <= et), 'labels'] = labels
 
-    filename = OUTPUT_FOLDER + subfolder + '.csv'
-    filename_metadata = OUTPUT_FOLDER + subfolder + '_metadata.csv'
+        filename = OUTPUT_FOLDER + subfolder + '.csv'
+        filename_metadata = OUTPUT_FOLDER + subfolder + '_metadata.csv'
 
-    df_traj_all.to_csv(filename)
-    df_metadata = retrieve_metadata(df_traj_all)
-    df_metadata.to_csv(filename_metadata)
+        X,y = retrieve_metadata(df_traj_all)
+        np.savetxt(f_X, X,fmt='%10.3f',delimiter=',')
+        np.savetxt(f_y, y, fmt='%3i', delimiter=',')
+        total_lines += X.shape[0]
+
+        times.append(time.time()-t1)
+        t1 = time.time()
+        left = (total_subs-(i_sub+1))*np.mean(times)
+        print('At %5i/%5i with sub %5s and num_traj %5i and total traj %7i est time left %s'%(i_sub,total_subs,subfolder, len(traj_files),total_lines, str(datetime.timedelta(seconds=left))))
