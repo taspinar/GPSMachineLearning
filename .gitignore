@@ -1,4 +1,5 @@
 notebooks/.ipynb_checkpoints/
+cluster/.ipynb_checkpoints/
 
 /GPSML
 /.idea
@@ -7,5 +8,5 @@ notebooks/.ipynb_checkpoints/
 *.pyc
 *.tar.gz
 *.png
-*util_cluster.py
+
 
