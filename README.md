@@ -21,6 +21,10 @@ We have provided some notebooks, which should give you a flying start, but feel 
 
 + [2. Modality detection with enriched and labeled trajectories](https://github.com/taspinar/GPSMachineLearning/blob/master/notebooks/2.modality_detection.ipynb)
 
++ [3. Clustering the trajectories with PCA and tSNE](https://github.com/taspinar/GPSMachineLearning/blob/master/notebooks/3._Cluster_GPS_data_with_PCA_and_tSNE.ipynb)
+
++ [4. Visualization and Geospatial analysis](https://github.com/taspinar/GPSMachineLearning/blob/master/notebooks/4.visualize_the_data.ipynb)
+
 
 # Possible relevant datasets
 + [Bus routes and stops of Beijing](https://www.dropbox.com/s/ryk0197wnr145rv/DT18.rar) -> contains 1.543 bus routes and 42.161 stops 
