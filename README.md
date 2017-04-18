@@ -4,6 +4,22 @@ This repository contains code and jupyter notebooks with machine learning algori
 
 The dataset used is the popular [GeoLife GPS Trajectories](https://www.microsoft.com/en-us/download/details.aspx?id=52367) 
 
+We have already processed this dataset, so that each trajectory (which only contains lat, long, timestamp) is enriched with velocity, acceleration and modality information. 
+
+This can be downloaded from [google drive](https://drive.google.com/drive/folders/0B22kg5oTwAn-Q0xOVDhRMVNhMDQ) (size 3.7 GB). 
+
+It is also available in [zipped format](https://www.dropbox.com/sh/rxick9po5mfgzv9/AADy_wL6km0iyv3wWI9JDaGMa?dl=0&lst=&preview=all.rar) (size 0.9 GB)
+
+For the classification and clustering part, only the metadata files are necessary. These contain aggregated data per trajectory (such as average velocity, average acceleration etc). 
+These metadata files are much smaller in size and can be downloaded from [google drive](https://drive.google.com/open?id=0B22kg5oTwAn-dFVmWEpvMTF4c2M) (1.5 MB zipped) and [dropbox](https://www.dropbox.com/sh/rxick9po5mfgzv9/AAB40x2VQKvQ1rJrsdKLmhyva/metadata?dl=0) (3.6 MB unzipped)
+
+# Main Contributors:
++ Ahmet Taspinar ; [linkedin](https://www.linkedin.com/in/ataspinar/) / [GitHub](https://github.com/taspinar)
+
++ Robert de Munter ; [linkedin](https://www.linkedin.com/in/robert-de-munter-a9a92022/) / [GitHub](https://github.com/Iggam)
+
++ Rob Romijnders ; [linkedin](https://www.linkedin.com/in/robromijnders/) / [GitHub](https://github.com/RobRomijnders)
+
 # Tasks
 
 + 0)	How can we load GPS trajectories in a proper way so that it will be easier to work with in the future.
